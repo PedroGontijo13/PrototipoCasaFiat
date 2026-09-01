@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-0f1759cd-49ce-483f-893d-b9dc7a1982bf/styles.css">
+<script src="_ds/classical-0f1759cd-49ce-483f-893d-b9dc7a1982bf/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #f3f2f2; color: #201f1d; overflow-x: hidden; }
+  a { color: #8f0f22; text-decoration: none; }
+  a:hover { color: #c8102e; }
+  @keyframes cdf-rise { from { opacity: 0; transform: translateY(1.1em) rotate(1.2deg); } to { opacity: 1; transform: none; } }
+  @keyframes cdf-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes cdf-sweep { 0% { transform: translateX(-120%); } 60%, 100% { transform: translateX(220%); } }
+  @keyframes cdf-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(200,16,46,.34); } 70% { box-shadow: 0 0 0 18px rgba(200,16,46,0); } }
+  @keyframes cdf-drift { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+  [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.2,.75,.2,1), transform .85s cubic-bezier(.2,.75,.2,1); }
+  [data-reveal].cdf-in { opacity: 1; transform: none; }
+  [data-reveal-x] { opacity: 0; clip-path: inset(0 100% 0 0); transition: opacity .5s ease, clip-path 1.1s cubic-bezier(.2,.75,.2,1); }
+  [data-reveal-x].cdf-in { opacity: 1; clip-path: inset(0 0 0 0); }
+  .cdf-card:hover { border-color: #c8102e !important; transform: translateY(-6px); }
+  .cdf-card { transition: transform .45s cubic-bezier(.2,.75,.2,1), border-color .3s ease, box-shadow .45s ease; }
+  .cdf-card:hover .cdf-arrow { transform: translateX(6px); opacity: 1; }
+  .cdf-arrow { transition: transform .35s ease, opacity .35s ease; opacity: .35; }
+  .cdf-navlink { position: relative; transition: color .25s ease; }
+  .cdf-navlink::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 1px; background: #c8102e; transition: right .35s cubic-bezier(.2,.75,.2,1); }
+  .cdf-navlink:hover::after { right: 0; }
+  .cdf-btn { transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease; }
+  .cdf-btn:hover { transform: translateY(-2px); }
+  [style*="grid-template-columns"] > * { min-width: 0; }
+  .cdf-navlink { white-space: nowrap; }
+  @media (max-width: 1100px) {
+    [style*="repeat(4, 1fr)"], [style*="repeat(3, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 1024px) {
+    #top > div, #motores > div, #orcamento > div, #empresa > div:first-child { grid-template-columns: 1fr !important; }
+    #top > div { gap: 40px !important; align-items: start !important; }
+    .cdf-hide-sm { width: 100%; overflow-x: auto; gap: 22px !important; font-size: 12.5px !important; }
+    header > div { flex-wrap: wrap; row-gap: 12px; }
+    #orcamento > div > div:first-child { border-right: 0 !important; border-bottom: 1px solid rgba(32,31,29,.16) !important; }
+    [style*="MONSENHOR"], [style*="letter-spacing: .16em; color: rgba(32,31,29,.5)"] { flex-wrap: wrap; }
+  }
+  @media (max-width: 860px) {
+    header > div { flex-wrap: wrap; row-gap: 12px; }
+    .cdf-hide-sm { order: 3; width: 100%; overflow-x: auto; padding-bottom: 4px; gap: 20px !important; font-size: 12.5px !important; }
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    [style*="repeat(4, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+    [style*="columns: 2"] { columns: 1 !important; }
+    section, footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+    section { padding-top: 64px !important; }
+    #orcamento > div > div:first-child { border-right: 0 !important; border-bottom: 1px solid rgba(32,31,29,.16) !important; }
+    [style*="padding: 58px 52px"], [style*="padding: 58px 46px"] { padding: 34px 22px !important; }
+    [style*="font-size: 340px"] { font-size: 160px !important; }
+  }
+</style>
+</helmet>
+
+<div style="font-family: var(--font-body); position: relative; width: 100%; overflow: hidden">
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; background: rgba(32,31,29,.08)">
+    <div style="height: 100%; display: flex; width: {{ progress }}">
+      <div style="flex: 1; background: #007a3d"></div>
+      <div style="flex: 1; background: #f3f2f2"></div>
+      <div style="flex: 1; background: #c8102e"></div>
+    </div>
+  </div>
+
+  <div style="background: #17161a; color: rgba(243,242,242,.72); font-size: 12px; letter-spacing: .06em; padding: 9px 0">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 18px">
+      <span style="font-variant-numeric: tabular-nums">PEÇAS NOVAS E USADAS · FIAT &amp; JEEP · ENVIAMOS PARA TODO O BRASIL</span>
+      <div style="display: flex; gap: 22px; align-items: center; font-variant-numeric: tabular-nums">
+        <a href="tel:+553134111555" style="color: rgba(243,242,242,.72)">(31) 3411-1555</a>
+        <a href="https://wa.me/5531987461030" style="color: #e1ad66">(31) 9 8746-1030</a>
+      </div>
+    </div>
+  </div>
+
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(243,242,242,.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(32,31,29,.14)">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; gap: 28px">
+      <a href="#top" style="display: flex; align-items: center; gap: 14px; color: #201f1d">
+        <sc-if value="{{ tricolor }}" hint-placeholder-val="{{ true }}">
+          <span style="display: flex; height: 34px; width: 15px; border: 1px solid rgba(32,31,29,.18)">
+            <span style="flex: 1; background: #007a3d"></span>
+            <span style="flex: 1; background: #f3f2f2"></span>
+            <span style="flex: 1; background: #c8102e"></span>
+          </span>
+        </sc-if>
+        <span style="display: flex; flex-direction: column; line-height: 1">
+          <span style="font-family: var(--font-heading); font-size: 25px; letter-spacing: .01em">Casa do Fiat</span>
+          <span style="font-size: 9.5px; letter-spacing: .34em; color: rgba(32,31,29,.55); margin-top: 5px">PEÇAS · FIAT &amp; JEEP</span>
+        </span>
+      </a>
+      <nav class="cdf-hide-sm" style="display: flex; gap: 26px; font-size: 13.5px; letter-spacing: .04em">
+        <a class="cdf-navlink" href="#empresa" style="color: #201f1d">Empresa</a>
+        <a class="cdf-navlink" href="#motores" style="color: #201f1d">Motores</a>
+        <a class="cdf-navlink" href="#produtos" style="color: #201f1d">Produtos</a>
+        <a class="cdf-navlink" href="#unidades" style="color: #201f1d">Unidades</a>
+        <a class="cdf-navlink" href="#parceiro" style="color: #201f1d">Seja Parceiro</a>
+        <a class="cdf-navlink" href="https://lista.mercadolivre.com.br/_CustId_429994136" style="color: #201f1d">Loja Virtual</a>
+      </nav>
+      <a class="cdf-btn" href="#orcamento" style="border: 1px solid #c8102e; color: #8f0f22; font-family: var(--font-heading); font-weight: 600; font-size: 14px; padding: 10px 20px; border-radius: 4px; white-space: nowrap" style-hover="background: #c8102e; color: #f8f4f4">Faça seu orçamento</a>
+    </div>
+  </header>
+
+  <section id="top" style="position: relative; padding: 88px 0 0">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: end">
+      <div>
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 26px; font-size: 11.5px; letter-spacing: .26em; color: #8f0f22; font-variant-numeric: tabular-nums">
+          <span style="width: 46px; height: 1px; background: #c8102e"></span>
+          <span>DESDE 1990 · BELO HORIZONTE</span>
+        </div>
+        <h1 style="font-family: var(--font-heading); font-weight: 400; font-size: clamp(46px, 6.2vw, 92px); line-height: .96; letter-spacing: -.025em; margin: 0 0 30px">
+          <span style="display: block; overflow: hidden"><span style="display: block; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .05s">Referência em</span></span>
+          <span style="display: block; overflow: hidden"><span style="display: block; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .17s"><em style="font-style: italic; color: #8f0f22">peças Fiat</em></span></span>
+          <span style="display: block; overflow: hidden"><span style="display: block; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .29s">novas e usadas.</span></span>
+        </h1>
+        <p style="max-width: 46ch; text-align: justify; hyphens: auto; font-size: 16.5px; line-height: 1.72; color: rgba(32,31,29,.78); animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .44s">
+          Mais de 35 anos resolvendo problemas — não apenas vendendo peças. Atendimento rápido, de qualidade e eficaz para clientes de todo o Brasil.
+        </p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .56s">
+          <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; align-items: center; gap: 10px; background: #c8102e; color: #f8f4f4; border: 1px solid #c8102e; font-family: var(--font-heading); font-weight: 600; font-size: 15.5px; padding: 15px 28px; border-radius: 4px; animation: cdf-pulse 3.4s ease-out infinite 1.6s" style-hover="background: #8f0f22; border-color: #8f0f22">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
+            Orçamento no WhatsApp
+          </a>
+          <a class="cdf-btn" href="#produtos" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(32,31,29,.35); color: #201f1d; font-family: var(--font-heading); font-weight: 600; font-size: 15.5px; padding: 15px 28px; border-radius: 4px" style-hover="border-color: #201f1d; background: #eae9e9">Ver catálogo de peças</a>
+        </div>
+      </div>
+
+      <div style="position: relative">
+        <div style="position: absolute; top: -34px; right: 0; font-family: var(--font-heading); font-size: 150px; line-height: 1; color: rgba(32,31,29,.06); font-variant-numeric: tabular-nums; letter-spacing: -.04em">35</div>
+        <div style="position: relative; padding: 8px; background: #eae9e9; border: 1px solid rgba(32,31,29,.16); overflow: hidden" data-parallax="1">
+          <image-slot id="cdf-hero" shape="rect" style="width: 100%; height: 430px" placeholder="Foto da loja / prateleiras de peças"></image-slot>
+          <div style="position: absolute; inset: 0; pointer-events: none; overflow: hidden">
+            <div style="position: absolute; top: 0; bottom: 0; width: 22%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.42), transparent); animation: cdf-marquee 0s, cdf-sweep 4.6s ease-in-out infinite 1.2s"></div>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; margin-top: 12px; font-size: 11px; letter-spacing: .12em; color: rgba(32,31,29,.5); min-width: 0">
+          <span style="min-width: 0">AV. DOM PEDRO II, 4090 — MONSENHOR MESSIAS, BH</span>
+          <span style="font-variant-numeric: tabular-nums">01</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 76px; border-top: 1px solid rgba(32,31,29,.16); border-bottom: 1px solid rgba(32,31,29,.16); padding: 18px 0; overflow: hidden; background: #eae9e9">
+      <div style="display: flex; width: max-content; animation: cdf-marquee 38s linear infinite">
+        <sc-for list="{{ modelsLoop }}" as="m" hint-placeholder-count="12">
+          <span style="display: flex; align-items: center; gap: 30px; padding: 0 15px; font-family: var(--font-heading); font-size: 22px; color: rgba(32,31,29,.62); white-space: nowrap">
+            {{ m }}
+            <span style="width: 5px; height: 5px; background: #c8102e; border-radius: 50%"></span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="empresa" style="max-width: 1240px; margin: 0 auto; padding: 104px 32px 0">
+    <div style="display: grid; grid-template-columns: .8fr 1.2fr; gap: 62px">
+      <div data-reveal>
+        <div style="font-size: 11.5px; letter-spacing: .26em; color: rgba(32,31,29,.5); margin-bottom: 18px">A CASA DO FIAT</div>
+        <h2 style="font-family: var(--font-heading); font-weight: 400; font-size: clamp(34px, 3.4vw, 52px); line-height: 1.04; letter-spacing: -.02em; margin: 0">Três décadas e meia dentro do motor da marca.</h2>
+        <div data-reveal-x style="height: 1px; background: #c8102e; margin: 30px 0 0"></div>
+      </div>
+      <div data-reveal style="columns: 2; column-gap: 40px; font-size: 15.5px; line-height: 1.78; text-align: justify; hyphens: auto; color: rgba(32,31,29,.8)">
+        <p>Empresa especializada em peças novas e usadas da marca Fiat, há mais de 35 anos no mercado — não apenas vendendo peças, mas resolvendo problemas para clientes de todo o Brasil.</p>
+        <p>Nosso estoque cobre da linha antiga à atual: motores completos e parciais, câmbios, suspensão, lataria, elétrica e acabamento, com procedência conferida peça por peça.</p>
+        <p>Atendimento rápido, de qualidade e eficaz — a peça certa, identificada pelo chassi ou pelo modelo e ano, e despachada no mesmo dia.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(32,31,29,.16); border: 1px solid rgba(32,31,29,.16); margin-top: 72px" data-reveal>
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="background: #f3f2f2; padding: 34px 26px">
+          <div style="font-family: var(--font-heading); font-weight: 400; font-size: 58px; line-height: 1; color: #201f1d; font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'">{{ s.shown }}<span style="color: #c8102e">{{ s.suffix }}</span></div>
+          <div style="margin-top: 14px; font-size: 12.5px; letter-spacing: .13em; color: rgba(32,31,29,.58); text-transform: uppercase">{{ s.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="produtos" style="max-width: 1240px; margin: 0 auto; padding: 104px 32px 0">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; border-bottom: 1px solid rgba(32,31,29,.16); padding-bottom: 22px" data-reveal>
+      <div>
+        <div style="font-size: 11.5px; letter-spacing: .26em; color: rgba(32,31,29,.5); margin-bottom: 16px">CATÁLOGO</div>
+        <h2 style="font-family: var(--font-heading); font-weight: 400; font-size: clamp(32px, 3.2vw, 48px); margin: 0; letter-spacing: -.02em">O que você procura</h2>
+      </div>
+      <span style="font-size: 13px; color: rgba(32,31,29,.55)">Não achou? Mande o chassi no WhatsApp — a gente localiza.</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 34px">
+      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="6">
+        <a class="cdf-card" href="{{ waLink }}" data-reveal style="display: flex; flex-direction: column; gap: 16px; padding: 30px 26px 26px; border: 1px solid rgba(32,31,29,.18); border-radius: 4px; background: #f3f2f2; color: #201f1d" style-hover="box-shadow: 0 12px 32px rgba(45,43,43,.14)">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <span style="color: #8f0f22" dangerouslySetInnerHTML="{{ c.icon }}"></span>
+            <span style="font-size: 11px; letter-spacing: .16em; color: rgba(32,31,29,.42); font-variant-numeric: tabular-nums">{{ c.num }}</span>
+          </div>
+          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 23px; margin: 6px 0 0">{{ c.title }}</h3>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: rgba(32,31,29,.66)">{{ c.body }}</p>
+          <span class="cdf-arrow" style="display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 18px; font-size: 12.5px; letter-spacing: .1em; color: #8f0f22">CONSULTAR →</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="motores" style="margin-top: 104px; background: #17161a; color: #f3f2f2; position: relative; overflow: hidden">
+    <div style="position: absolute; top: 50%; right: 3%; transform: translateY(-50%); font-family: var(--font-heading); font-size: 340px; line-height: .8; color: rgba(243,242,242,.045); font-variant-numeric: tabular-nums; pointer-events: none">02</div>
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center">
+      <div data-reveal>
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 11.5px; letter-spacing: .26em; color: #e1ad66; margin-bottom: 22px">
+          <span style="width: 46px; height: 1px; background: #e1ad66"></span> LINHA DE MOTORES
+        </div>
+        <h2 style="font-family: var(--font-heading); font-weight: 400; font-size: clamp(34px, 3.6vw, 56px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 24px; color: #f8f4f4">Motores completos, parciais e retificados.</h2>
+        <p style="max-width: 44ch; text-align: justify; hyphens: auto; font-size: 15.5px; line-height: 1.78; color: rgba(243,242,242,.7)">Fire, E.torQ, Multijet, GSE Firefly e a linha diesel — testados antes de sair, com garantia e nota. Informe modelo, ano e cilindrada; devolvemos disponibilidade e prazo no mesmo dia.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(243,242,242,.14); border: 1px solid rgba(243,242,242,.14); margin-top: 38px">
+          <sc-for list="{{ engines }}" as="e" hint-placeholder-count="6">
+            <div style="background: #17161a; padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+              <span style="font-family: var(--font-heading); font-size: 18px; color: #f3f2f2">{{ e.name }}</span>
+              <span style="font-size: 11.5px; letter-spacing: .1em; color: rgba(243,242,242,.5); font-variant-numeric: tabular-nums">{{ e.spec }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; margin-top: 34px; border: 1px solid #e1ad66; color: #e1ad66; font-family: var(--font-heading); font-weight: 600; font-size: 15px; padding: 14px 26px; border-radius: 4px" style-hover="background: #e1ad66; color: #17161a">Consultar disponibilidade</a>
+      </div>
+      <div data-reveal style="padding: 8px; background: rgba(243,242,242,.08); border: 1px solid rgba(243,242,242,.16); animation: cdf-drift 5s ease-in-out infinite alternate">
+        <image-slot id="cdf-motor" shape="rect" style="width: 100%; height: 470px" placeholder="Foto de motor Fiat no estoque"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  <section id="parceiro" style="max-width: 1240px; margin: 0 auto; padding: 104px 32px 0">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px">
+      <sc-for list="{{ steps }}" as="p" hint-placeholder-count="3">
+        <div data-reveal style="border-top: 2px solid #c8102e; padding-top: 22px">
+          <div style="font-family: var(--font-heading); font-size: 15px; letter-spacing: .1em; color: #8f0f22; font-variant-numeric: tabular-nums">{{ p.num }}</div>
+          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 25px; margin: 14px 0 10px">{{ p.title }}</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.72; color: rgba(32,31,29,.7); text-align: justify; hyphens: auto">{{ p.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="orcamento" style="max-width: 1240px; margin: 104px auto 0; padding: 0 32px">
+    <div style="border: 1px solid rgba(32,31,29,.18); background: #eae9e9; display: grid; grid-template-columns: 1.1fr .9fr" data-reveal>
+      <div style="padding: 58px 52px; border-right: 1px solid rgba(32,31,29,.16)">
+        <div style="font-size: 11.5px; letter-spacing: .26em; color: rgba(32,31,29,.5); margin-bottom: 18px">FAÇA SEU ORÇAMENTO</div>
+        <h2 style="font-family: var(--font-heading); font-weight: 400; font-size: clamp(30px, 3vw, 44px); line-height: 1.06; letter-spacing: -.02em; margin: 0 0 14px">Diga a peça. Respondemos no WhatsApp.</h2>
+        <p style="font-size: 15px; line-height: 1.7; color: rgba(32,31,29,.68); max-width: 42ch">Preencha e o pedido abre direto na conversa, já formatado para o nosso balcão.</p>
+        <div style="display: grid; gap: 16px; margin-top: 30px; max-width: 460px">
+          <label style="display: grid; gap: 7px; font-size: 12px; letter-spacing: .12em; color: rgba(32,31,29,.6)">SEU NOME
+            <input value="{{ form.nome }}" onChange="{{ onNome }}" placeholder="Ex.: João Batista" style="font-family: var(--font-body); font-size: 15px; padding: 12px 14px; border: 1px solid rgba(32,31,29,.28); border-radius: 4px; background: #f8f4f4; color: #201f1d">
+          </label>
+          <div style="display: grid; grid-template-columns: 1.4fr .6fr; gap: 16px">
+            <label style="display: grid; gap: 7px; font-size: 12px; letter-spacing: .12em; color: rgba(32,31,29,.6)">MODELO
+              <input value="{{ form.modelo }}" onChange="{{ onModelo }}" placeholder="Ex.: Strada 1.4" style="font-family: var(--font-body); font-size: 15px; padding: 12px 14px; border: 1px solid rgba(32,31,29,.28); border-radius: 4px; background: #f8f4f4; color: #201f1d">
+            </label>
+            <label style="display: grid; gap: 7px; font-size: 12px; letter-spacing: .12em; color: rgba(32,31,29,.6)">ANO
+              <input value="{{ form.ano }}" onChange="{{ onAno }}" placeholder="2018" style="font-family: var(--font-body); font-size: 15px; padding: 12px 14px; border: 1px solid rgba(32,31,29,.28); border-radius: 4px; background: #f8f4f4; color: #201f1d; font-variant-numeric: tabular-nums">
+            </label>
+          </div>
+          <label style="display: grid; gap: 7px; font-size: 12px; letter-spacing: .12em; color: rgba(32,31,29,.6)">PEÇA QUE PRECISA
+            <input value="{{ form.peca }}" onChange="{{ onPeca }}" placeholder="Ex.: coxim do motor, farol direito" style="font-family: var(--font-body); font-size: 15px; padding: 12px 14px; border: 1px solid rgba(32,31,29,.28); border-radius: 4px; background: #f8f4f4; color: #201f1d">
+          </label>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px">
+            <sc-for list="{{ chips }}" as="ch" hint-placeholder-count="4">
+              <button onClick="{{ ch.pick }}" class="cdf-btn" style="font-family: var(--font-body); font-size: 12.5px; padding: 8px 14px; border-radius: 999px; cursor: pointer; border: 1px solid rgba(32,31,29,.24); background: transparent; color: rgba(32,31,29,.7)" style-hover="border-color: #c8102e; color: #8f0f22">{{ ch.label }}</button>
+            </sc-for>
+          </div>
+          <a class="cdf-btn" href="{{ formLink }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; background: #c8102e; color: #f8f4f4; border: 1px solid #c8102e; font-family: var(--font-heading); font-weight: 600; font-size: 16px; padding: 15px 26px; border-radius: 4px" style-hover="background: #8f0f22; border-color: #8f0f22">Enviar no WhatsApp</a>
+        </div>
+      </div>
+      <div id="unidades" style="padding: 58px 46px; display: flex; flex-direction: column; gap: 26px">
+        <div style="font-size: 11.5px; letter-spacing: .26em; color: rgba(32,31,29,.5)">UNIDADES</div>
+        <sc-for list="{{ units }}" as="u" hint-placeholder-count="3">
+          <div style="border-bottom: 1px solid rgba(32,31,29,.16); padding-bottom: 20px">
+            <h4 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; margin: 0 0 6px">{{ u.name }}</h4>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(32,31,29,.66)">{{ u.addr }}</p>
+            <p style="margin: 6px 0 0; font-size: 13.5px; color: #8f0f22; font-variant-numeric: tabular-nums">{{ u.phone }}</p>
+          </div>
+        </sc-for>
+        <div style="font-size: 13.5px; line-height: 1.7; color: rgba(32,31,29,.66)">Seg a sex, 8h–18h · Sáb, 8h–12h<br>vendas@casadofiat.com.br</div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top: 104px; background: #17161a; color: rgba(243,242,242,.7)">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 72px 32px 30px; display: grid; grid-template-columns: 1.4fr .8fr .8fr .9fr; gap: 44px">
+      <div>
+        <div style="display: flex; align-items: center; gap: 13px; margin-bottom: 20px">
+          <span style="display: flex; height: 32px; width: 14px">
+            <span style="flex: 1; background: #007a3d"></span>
+            <span style="flex: 1; background: #f3f2f2"></span>
+            <span style="flex: 1; background: #c8102e"></span>
+          </span>
+          <span style="font-family: var(--font-heading); font-size: 24px; color: #f8f4f4">Casa do Fiat</span>
+        </div>
+        <p style="font-size: 14px; line-height: 1.72; max-width: 34ch; margin: 0">Peças novas e usadas Fiat &amp; Jeep. Mais de 35 anos resolvendo problemas para todo o Brasil.</p>
+      </div>
+      <div>
+        <div style="font-size: 11px; letter-spacing: .2em; color: rgba(243,242,242,.45); margin-bottom: 16px">LINKS</div>
+        <div style="display: grid; gap: 10px; font-size: 14px">
+          <a href="#empresa" style="color: rgba(243,242,242,.7)">Empresa</a>
+          <a href="#motores" style="color: rgba(243,242,242,.7)">Motores</a>
+          <a href="#produtos" style="color: rgba(243,242,242,.7)">Produtos</a>
+          <a href="#unidades" style="color: rgba(243,242,242,.7)">Unidades</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 11px; letter-spacing: .2em; color: rgba(243,242,242,.45); margin-bottom: 16px">CONTATO</div>
+        <div style="display: grid; gap: 10px; font-size: 14px; font-variant-numeric: tabular-nums">
+          <a href="tel:+553134111555" style="color: rgba(243,242,242,.7)">(31) 3411-1555</a>
+          <a href="https://wa.me/5531987461030" style="color: rgba(243,242,242,.7)">(31) 9 8746-1030</a>
+          <span>vendas@casadofiat.com.br</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 11px; letter-spacing: .2em; color: rgba(243,242,242,.45); margin-bottom: 16px">LOJA VIRTUAL</div>
+        <a class="cdf-btn" href="https://lista.mercadolivre.com.br/_CustId_429994136" style="display: inline-flex; border: 1px solid rgba(243,242,242,.4); color: #f3f2f2; font-family: var(--font-heading); font-weight: 600; font-size: 14px; padding: 12px 20px; border-radius: 4px" style-hover="border-color: #e1ad66; color: #e1ad66">Comprar online</a>
+      </div>
+    </div>
+    <div style="max-width: 1240px; margin: 0 auto; padding: 22px 32px 40px; border-top: 1px solid rgba(243,242,242,.14); display: flex; justify-content: space-between; gap: 20px; font-size: 12px; color: rgba(243,242,242,.45)">
+      <span>© 2026 Casa do Fiat · Av. Dom Pedro II, 4090 — BH/MG</span>
+      <span>Termos de Uso · Política de Privacidade</span>
+    </div>
+  </footer>
+
+  <a href="{{ waLink }}" class="cdf-btn" style="position: fixed; right: 26px; bottom: 26px; z-index: 55; display: flex; align-items: center; gap: 10px; background: #17161a; color: #f3f2f2; border: 1px solid rgba(243,242,242,.2); padding: 14px 20px; border-radius: 999px; font-family: var(--font-heading); font-weight: 600; font-size: 14.5px; box-shadow: 0 12px 32px rgba(45,43,43,.28)" style-hover="background: #c8102e; border-color: #c8102e">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
+    Falar agora
+  </a>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5531987461030&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tricolorAccents&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;animateCounters&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = {
+    progress: "0%",
+    counters: [0, 0, 0, 0],
+    form: { nome: "", modelo: "", ano: "", peca: "" }
+  };
+
+  models = ["Uno", "Palio", "Strada", "Toro", "Argo", "Mobi", "Cronos", "Fiorino", "Ducato", "Doblò", "Siena", "Punto", "Pulse", "Fastback", "Renegade", "Compass"];
+
+  statDefs = [
+    { target: 35, suffix: "+", label: "anos de mercado" },
+    { target: 12, suffix: "mil", label: "itens em estoque" },
+    { target: 27, suffix: "", label: "estados atendidos" },
+    { target: 24, suffix: "h", label: "resposta ao orçamento" }
+  ];
+
+  icon(paths) {
+    return { __html: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">' + paths + "</svg>" };
+  }
+
+  componentDidMount() {
+    this.onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      this.setState({ progress: (max > 0 ? (h.scrollTop / max) * 100 : 0).toFixed(1) + "%" });
+      const p = document.querySelector("[data-parallax]");
+      if (p) p.style.transform = "translateY(" + Math.min(40, h.scrollTop * 0.06) + "px)";
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("cdf-in");
+        io.unobserve(e.target);
+        if (e.target.hasAttribute("data-stats")) this.runCounters();
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+
+    this.io = io;
+    setTimeout(() => {
+      document.querySelectorAll("[data-reveal], [data-reveal-x]").forEach((el, i) => {
+        el.style.transitionDelay = (i % 3) * 90 + "ms";
+        io.observe(el);
+      });
+      const grid = document.querySelectorAll("[data-reveal]")[2];
+      if (grid) { grid.setAttribute("data-stats", "1"); }
+      setTimeout(() => this.runCounters(), 1200);
+    }, 60);
+
+    this.seed = setTimeout(() => {
+      if (!this.done) this.setState({ counters: this.statDefs.map((s) => s.target) });
+    }, 3000);
+
+    this.fallback = setTimeout(() => {
+      document.querySelectorAll("[data-reveal], [data-reveal-x]").forEach((el) => el.classList.add("cdf-in"));
+    }, 3500);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
+    if (this.io) this.io.disconnect();
+    clearTimeout(this.fallback);
+    clearTimeout(this.safety);
+    clearTimeout(this.seed);
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+
+  runCounters() {
+    if (this.counted || this.props.animateCounters === false) {
+      if (!this.counted) this.setState({ counters: this.statDefs.map((s) => s.target) });
+      this.counted = true;
+      return;
+    }
+    this.counted = true;
+    const t0 = performance.now();
+    const dur = 1500;
+    const finish = () => {
+      this.done = true;
+      this.setState({ counters: this.statDefs.map((s) => s.target) });
+    };
+    const tick = (t) => {
+      const k = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      this.setState({ counters: this.statDefs.map((s) => Math.round(s.target * eased)) });
+      if (k < 1) this.raf = requestAnimationFrame(tick);
+      else this.done = true;
+    };
+    this.raf = requestAnimationFrame(tick);
+    this.safety = setTimeout(() => { if (!this.done) finish(); }, 1800);
+  }
+
+  wa(msg) {
+    const n = this.props.whatsappNumber || "5531987461030";
+    return "https://wa.me/" + n + (msg ? "?text=" + encodeURIComponent(msg) : "");
+  }
+
+  setField(k) {
+    return (e) => {
+      const v = e.target.value;
+      this.setState((s) => ({ form: Object.assign({}, s.form, { [k]: v }) }));
+    };
+  }
+
+  renderVals() {
+    const f = this.state.form;
+    const msg =
+      "Olá, Casa do Fiat! " + (f.nome ? "Meu nome é " + f.nome + ". " : "") +
+      "Preciso de: " + (f.peca || "uma peça") +
+      (f.modelo ? " para " + f.modelo : "") + (f.ano ? " " + f.ano : "") + ".";
+
+    return {
+      progress: this.state.progress,
+      tricolor: this.props.tricolorAccents !== false,
+      waLink: this.wa("Olá, Casa do Fiat! Gostaria de um orçamento de peça."),
+      formLink: this.wa(msg),
+      form: f,
+      onNome: this.setField("nome"),
+      onModelo: this.setField("modelo"),
+      onAno: this.setField("ano"),
+      onPeca: this.setField("peca"),
+      modelsLoop: this.models.concat(this.models),
+      stats: this.statDefs.map((s, i) => ({ shown: this.state.counters[i], suffix: s.suffix, label: s.label })),
+      chips: ["Motor", "Câmbio", "Suspensão", "Lataria", "Elétrica"].map((label) => ({
+        label,
+        pick: () => this.setState((s) => ({ form: Object.assign({}, s.form, { peca: label }) }))
+      })),
+      categories: [
+        { num: "01", title: "Motores", body: "Completos, parciais e retificados — Fire, E.torQ, Multijet e Firefly.", icon: this.icon('<path d="M6 10h3l2-3h4l2 3h3v6h-2l-2 3h-4l-2-3H6z"/><path d="M3 12h3"/>') },
+        { num: "02", title: "Câmbio e transmissão", body: "Manuais, automatizados e diferenciais, testados antes do envio.", icon: this.icon('<circle cx="12" cy="12" r="3.2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/>') },
+        { num: "03", title: "Suspensão e freios", body: "Amortecedores, bandejas, discos, pinças e kits completos.", icon: this.icon('<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/>') },
+        { num: "04", title: "Lataria e acabamento", body: "Portas, capôs, para-lamas, faróis e peças de interior originais.", icon: this.icon('<path d="M3 13l2-5h14l2 5v4h-3M6 17H3v-4"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/>') },
+        { num: "05", title: "Elétrica e injeção", body: "Módulos, bicos, bobinas, alternadores e chicotes conferidos.", icon: this.icon('<path d="M13 2L5 14h6l-1 8 8-12h-6z"/>') },
+        { num: "06", title: "Usadas com garantia", body: "Peças de desmonte com procedência, nota fiscal e garantia real.", icon: this.icon('<path d="M20 7l-8-4-8 4v6c0 4 3.5 7 8 8 4.5-1 8-4 8-8z"/><path d="M9 12l2.2 2.2L15.5 10"/>') }
+      ],
+      engines: [
+        { name: "Fire 1.0 / 1.4", spec: "8V · 1990–2020" },
+        { name: "Firefly GSE", spec: "1.0 / 1.3 · 2017+" },
+        { name: "E.torQ", spec: "1.6 / 1.8 · 16V" },
+        { name: "Multijet", spec: "1.3 / 1.6 · diesel" },
+        { name: "Ducato 2.3", spec: "diesel · utilitário" },
+        { name: "Tigershark", spec: "2.0 · Jeep" }
+      ],
+      steps: [
+        { num: "PASSO 01", title: "Manda o modelo", body: "Chassi, modelo e ano no WhatsApp — ou uma foto da peça. Identificamos o código correto." },
+        { num: "PASSO 02", title: "Recebe o orçamento", body: "Preço da peça nova e da usada, prazo e frete, em até 24 horas úteis." },
+        { num: "PASSO 03", title: "Sai no mesmo dia", body: "Aprovado, despachamos para todo o Brasil com nota fiscal e garantia." }
+      ],
+      units: [
+        { name: "Matriz — Monsenhor Messias", addr: "Av. Dom Pedro II, 4090 · Belo Horizonte/MG", phone: "(31) 3411-1555" },
+        { name: "Loja Peças Usadas", addr: "Av. Dom Pedro II, 4128 · Belo Horizonte/MG", phone: "(31) 9 8746-1030" },
+        { name: "Centro de Motores", addr: "Consulte disponibilidade e visita técnica", phone: "(31) 9 8746-1030" }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>
