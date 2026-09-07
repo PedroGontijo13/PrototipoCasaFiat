@@ -12,15 +12,15 @@
 <script src="_ds/classical-0f1759cd-49ce-483f-893d-b9dc7a1982bf/_ds_bundle.js"></script>
 <script src="./image-slot.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Archivo:wdth,wght@100..125,300..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
   :root {
     --bg: #171512; --bg-2: #0f0e0c; --panel: #201d19;
     --ink: #f6f1e8; --ink-soft: rgba(246,241,232,.78); --ink-mute: rgba(246,241,232,.56); --ink-faint: rgba(246,241,232,.4);
     --line: rgba(246,241,232,.14);
     --gold: #e1ad66; --rosso: #e11d38; --rosso-bright: #ff3049; --verde: #0e9e52;
-    --serif: "Bodoni Moda", Georgia, "Times New Roman", serif;
-    --sans: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --shell: 32px;
     /* escala tipográfica fluida — um passo por papel, sem tamanhos avulsos */
     --t-eyebrow: 10.5px;
@@ -31,14 +31,14 @@
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; }
-  section[id], div[id="unidades"] { scroll-margin-top: calc(var(--header-h) + 12px); }
+  section[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
   body {
     margin: 0; background: var(--bg); color: var(--ink); overflow-x: hidden;
     font-family: var(--sans); font-size: var(--t-body); line-height: 1.65;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility; -webkit-tap-highlight-color: transparent;
   }
-  h1, h2, h3, h4 { font-family: var(--serif); font-optical-sizing: auto; text-wrap: balance; }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -.02em; text-wrap: balance; }
   p { text-wrap: pretty; }
   a { color: var(--gold); text-decoration: none; }
   a:hover { color: var(--rosso-bright); }
@@ -50,7 +50,7 @@
   /* rótulos utilitários consistentes */
   .cdf-eyebrow {
     font-family: var(--sans); font-size: var(--t-eyebrow); font-weight: 600;
-    font-stretch: 112%; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-mute);
+    letter-spacing: .22em; text-transform: uppercase; color: var(--ink-mute);
   }
 
   @keyframes cdf-rise { from { opacity: 0; transform: translateY(1.1em) rotate(1.2deg); } to { opacity: 1; transform: none; } }
@@ -75,17 +75,26 @@
   .cdf-btn:hover { transform: translateY(-2px); }
   [style*="grid-template-columns"] > * { min-width: 0; }
 
+  /* abas da galeria de estoque */
+  .cdf-tab {
+    font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-mute); background: transparent; border: 0; border-bottom: 2px solid transparent;
+    padding: 14px 18px; margin-bottom: -1px; cursor: pointer; transition: color .25s ease, border-color .25s ease;
+  }
+  .cdf-tab:hover { color: var(--ink); }
+  .cdf-tab.is-active { color: var(--ink); border-bottom-color: var(--rosso); }
+
   /* ---------------- Responsivo ---------------- */
   @media (max-width: 1100px) {
     [style*="repeat(4, 1fr)"], [style*="repeat(3, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
   }
   @media (max-width: 1024px) {
     :root { --header-h: 68px; }
-    #top > div, #motores > div, #orcamento > div, #empresa > div:first-child { grid-template-columns: 1fr !important; }
+    #top > div, #motores > div, .cdf-setores, #empresa > div:first-child { grid-template-columns: 1fr !important; }
     #top > div { gap: 40px !important; align-items: start !important; }
     .cdf-nav { width: 100%; order: 3; overflow-x: auto; gap: 22px !important; font-size: 12.5px !important; padding: 10px 0 2px; border-top: 1px solid var(--line); }
     .cdf-header-inner { flex-wrap: wrap; row-gap: 4px; }
-    #orcamento > div > div:first-child { border-right: 0 !important; border-bottom: 1px solid var(--line) !important; }
+    .cdf-setores > div:first-child { border-right: 0 !important; border-bottom: 1px solid var(--line) !important; }
   }
   @media (max-width: 860px) {
     :root { --shell: 20px; }
@@ -172,7 +181,7 @@
 
   <div style="background: #0f0e0c; color: rgba(242,237,228,.6); font-size: 11.5px; letter-spacing: .08em; padding: 10px 0; font-weight: 400">
     <div class="cdf-topbar-inner" style="max-width: 1240px; margin: 0 auto; padding: 0 var(--shell); display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap">
-      <span class="cdf-topbar-tag" style="font-variant-numeric: tabular-nums">PEÇAS NOVAS E USADAS · FIAT &amp; JEEP · ENVIAMOS PARA TODO O BRASIL</span>
+      <span class="cdf-topbar-tag" style="font-variant-numeric: tabular-nums">PEÇAS NOVAS E USADAS · FIAT · JEEP · RAM · ENVIAMOS PARA TODO O BRASIL</span>
       <div style="display: flex; gap: 22px; align-items: center; font-variant-numeric: tabular-nums">
         <a href="tel:+553134111555" style="color: rgba(242,237,228,.6)">(31) 3411-1555</a>
         <a href="https://wa.me/5531987461030" style="color: #e1ad66">WhatsApp (31) 9 8746-1030</a>
@@ -191,8 +200,8 @@
           </span>
         </sc-if>
         <span style="display: flex; flex-direction: column; line-height: 1">
-          <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 25px; font-weight: 500; letter-spacing: .005em">Casa do Fiat</span>
-          <span style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 9px; font-weight: 600; letter-spacing: .3em; color: rgba(242,237,228,.5); margin-top: 6px">PEÇAS · FIAT &amp; JEEP</span>
+          <span style="font-family: var(--serif); font-size: 25px; font-weight: 500; letter-spacing: .005em">Casa do Fiat</span>
+          <span style="font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: .3em; color: rgba(242,237,228,.5); margin-top: 6px">PEÇAS · FIAT · JEEP · RAM</span>
         </span>
       </a>
       <nav class="cdf-nav" style="display: flex; gap: 26px; font-size: 13px; letter-spacing: .05em; font-weight: 400">
@@ -200,10 +209,10 @@
         <a class="cdf-navlink" href="#produtos" style="color: rgba(242,237,228,.82)">Produtos</a>
         <a class="cdf-navlink" href="#motores" style="color: rgba(242,237,228,.82)">Motores</a>
         <a class="cdf-navlink" href="#como-funciona" style="color: rgba(242,237,228,.82)">Como funciona</a>
-        <a class="cdf-navlink" href="#unidades" style="color: rgba(242,237,228,.82)">Unidades</a>
+        <a class="cdf-navlink" href="#estoque" style="color: rgba(242,237,228,.82)">Estoque</a>
         <a class="cdf-navlink" href="https://lista.mercadolivre.com.br/_CustId_429994136" style="color: rgba(242,237,228,.82)">Loja Virtual</a>
       </nav>
-      <a class="cdf-btn cdf-header-cta" href="#orcamento" style="border: 1px solid #e11d38; color: #f2ede4; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 12px 20px; border-radius: 4px; white-space: nowrap" style-hover="background: #e11d38; border-color: #e11d38">Orçamento</a>
+      <a class="cdf-btn cdf-header-cta" href="#orcamento" style="border: 1px solid #e11d38; color: #f2ede4; font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 12px 20px; border-radius: 4px; white-space: nowrap" style-hover="background: #e11d38; border-color: #e11d38">Orçamento</a>
     </div>
   </header>
 
@@ -211,11 +220,11 @@
     <div style="position: absolute; top: 6%; left: -10%; width: 46%; height: 60%; background: radial-gradient(ellipse at center, rgba(225,29,56,.16), transparent 68%); pointer-events: none; animation: cdf-glow 7s ease-in-out infinite"></div>
     <div style="max-width: 1240px; margin: 0 auto; padding: 0 var(--shell); display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: end; position: relative">
       <div>
-        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 26px; font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: #e1ad66; font-variant-numeric: tabular-nums">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 26px; font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: #e1ad66; font-variant-numeric: tabular-nums">
           <span style="width: 46px; height: 1px; background: #e11d38"></span>
           <span>DESDE 1990 · BELO HORIZONTE</span>
         </div>
-        <h1 class="cdf-hero-h1" style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: clamp(40px, 5.4vw, 78px); line-height: 1.0; letter-spacing: -.02em; margin: 0 0 28px; color: #f8f4ee">
+        <h1 class="cdf-hero-h1" style="font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.4vw, 78px); line-height: 1.0; letter-spacing: -.02em; margin: 0 0 28px; color: #f8f4ee">
           <span style="display: block; overflow: hidden"><span style="display: block; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .05s">Referência em</span></span>
           <span style="display: block; overflow: hidden"><span style="display: block; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .17s"><em style="font-style: italic; color: #e1ad66">peças Fiat</em></span></span>
           <span style="display: block; overflow: hidden"><span style="display: block; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .29s">novas e usadas.</span></span>
@@ -224,11 +233,11 @@
           Mais de 35 anos resolvendo problemas — não apenas vendendo peças. Atendimento rápido e eficaz para clientes de todo o Brasil.
         </p>
         <div class="cdf-cta-row" style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .56s">
-          <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; align-items: center; gap: 10px; background: #e11d38; color: #fff; border: 1px solid #e11d38; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 16px 26px; border-radius: 4px; animation: cdf-pulse 3.4s ease-out infinite 1.6s" style-hover="background: #ff3049; border-color: #ff3049">
+          <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; align-items: center; gap: 10px; background: #e11d38; color: #fff; border: 1px solid #e11d38; font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 16px 26px; border-radius: 4px; animation: cdf-pulse 3.4s ease-out infinite 1.6s" style-hover="background: #ff3049; border-color: #ff3049">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
             Orçamento no WhatsApp
           </a>
-          <a class="cdf-btn" href="#produtos" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(242,237,228,.3); color: #f2ede4; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 16px 26px; border-radius: 4px" style-hover="border-color: #e1ad66; color: #e1ad66">Ver catálogo</a>
+          <a class="cdf-btn" href="#produtos" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(242,237,228,.3); color: #f2ede4; font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 16px 26px; border-radius: 4px" style-hover="border-color: #e1ad66; color: #e1ad66">Ver catálogo</a>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: rgba(242,237,228,.5); animation: cdf-rise 1s cubic-bezier(.2,.75,.2,1) both .66s">
           <span>Resposta no mesmo dia</span>
@@ -240,7 +249,7 @@
       </div>
 
       <div style="position: relative">
-        <div class="cdf-hero-ghost" style="position: absolute; top: -40px; right: 0; font-family: 'Bodoni Moda', Georgia, serif; font-size: clamp(96px, 12vw, 158px); line-height: 1; color: rgba(242,237,228,.07); font-variant-numeric: tabular-nums; letter-spacing: -.04em; pointer-events: none">35</div>
+        <div class="cdf-hero-ghost" style="position: absolute; top: -40px; right: 0; font-family: var(--serif); font-size: clamp(96px, 12vw, 158px); line-height: 1; color: rgba(242,237,228,.07); font-variant-numeric: tabular-nums; letter-spacing: -.04em; pointer-events: none">35</div>
         <div style="position: relative; padding: 8px; background: #201d19; border: 1px solid rgba(242,237,228,.16); overflow: hidden" data-parallax="1">
           <image-slot id="cdf-hero" class="cdf-hero-img" shape="rect" style="width: 100%; height: 430px" placeholder="Foto da loja / prateleiras de peças"></image-slot>
           <div style="position: absolute; inset: 0; pointer-events: none; overflow: hidden">
@@ -257,7 +266,7 @@
     <div style="margin-top: 72px; border-top: 1px solid rgba(242,237,228,.14); border-bottom: 1px solid rgba(242,237,228,.14); padding: 18px 0; overflow: hidden; background: #0f0e0c">
       <div class="cdf-marquee" style="display: flex; width: max-content; animation: cdf-marquee 38s linear infinite">
         <sc-for list="{{ modelsLoop }}" as="m" hint-placeholder-count="12">
-          <span style="display: flex; align-items: center; gap: 30px; padding: 0 15px; font-family: 'Bodoni Moda', Georgia, serif; font-size: 23px; color: rgba(242,237,228,.5); white-space: nowrap">
+          <span style="display: flex; align-items: center; gap: 30px; padding: 0 15px; font-family: var(--serif); font-size: 23px; color: rgba(242,237,228,.5); white-space: nowrap">
             {{ m }}
             <span style="width: 5px; height: 5px; background: #e11d38; border-radius: 50%"></span>
           </span>
@@ -266,11 +275,22 @@
     </div>
   </section>
 
+  <section aria-label="Marcas com estoque amplo" style="background: #0f0e0c; border-bottom: 1px solid rgba(242,237,228,.1)">
+    <div class="cdf-brands" style="max-width: 1240px; margin: 0 auto; padding: 40px var(--shell); display: flex; align-items: center; justify-content: center; gap: 44px; flex-wrap: wrap; text-align: center">
+      <span style="font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(242,237,228,.5)">Estoque amplo das três linhas Stellantis</span>
+      <div style="display: flex; align-items: center; gap: 34px; flex-wrap: wrap; justify-content: center">
+        <image-slot id="cdf-brand-fiat" shape="rect" style="width: 128px; height: 46px" placeholder="Logo FIAT (nova)"></image-slot>
+        <image-slot id="cdf-brand-jeep" shape="rect" style="width: 128px; height: 46px" placeholder="Logo Jeep (cromada)"></image-slot>
+        <image-slot id="cdf-brand-ram" shape="rect" style="width: 128px; height: 46px" placeholder="Logo RAM (cromada)"></image-slot>
+      </div>
+    </div>
+  </section>
+
   <section id="empresa" style="max-width: 1240px; margin: 0 auto; padding: 104px 32px 0">
     <div style="display: grid; grid-template-columns: .8fr 1.2fr; gap: 62px">
       <div data-reveal>
-        <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66); margin-bottom: 18px">A CASA DO FIAT</div>
-        <h2 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: clamp(34px, 3.4vw, 54px); line-height: 1.06; letter-spacing: -.018em; margin: 0; color: #f8f4ee">Três décadas e meia dentro do motor da marca.</h2>
+        <div style="font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66); margin-bottom: 18px">A CASA DO FIAT</div>
+        <h2 style="font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.4vw, 54px); line-height: 1.06; letter-spacing: -.018em; margin: 0; color: #f8f4ee">Três décadas e meia dentro do motor da marca.</h2>
         <div data-reveal-x style="height: 1px; background: #e11d38; margin: 30px 0 0"></div>
       </div>
       <div data-reveal style="columns: 2; column-gap: 42px; font-size: 15.5px; font-weight: 400; line-height: 1.75; color: rgba(242,237,228,.76)">
@@ -283,7 +303,7 @@
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(242,237,228,.14); border: 1px solid rgba(242,237,228,.14); margin-top: 68px" data-reveal>
       <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
         <div class="cdf-stat" style="background: #171512; padding: 32px 26px">
-          <div class="cdf-stat-num" style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: clamp(42px, 4.4vw, 58px); line-height: 1; color: #f8f4ee; font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'">{{ s.shown }}<span style="color: #e11d38">{{ s.suffix }}</span></div>
+          <div class="cdf-stat-num" style="font-family: var(--serif); font-weight: 400; font-size: clamp(42px, 4.4vw, 58px); line-height: 1; color: #f8f4ee; font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'">{{ s.shown }}<span style="color: #e11d38">{{ s.suffix }}</span></div>
           <div style="margin-top: 12px; font-size: 11px; letter-spacing: .13em; color: rgba(242,237,228,.52); text-transform: uppercase; line-height: 1.4">{{ s.label }}</div>
         </div>
       </sc-for>
@@ -293,8 +313,8 @@
   <section id="produtos" style="max-width: 1240px; margin: 0 auto; padding: 104px 32px 0">
     <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; border-bottom: 1px solid rgba(242,237,228,.14); padding-bottom: 22px; flex-wrap: wrap" data-reveal>
       <div>
-        <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66); margin-bottom: 16px">CATÁLOGO</div>
-        <h2 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.2vw, 50px); margin: 0; letter-spacing: -.018em; color: #f8f4ee">O que você procura</h2>
+        <div style="font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66); margin-bottom: 16px">CATÁLOGO</div>
+        <h2 style="font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 3.2vw, 50px); margin: 0; letter-spacing: -.018em; color: #f8f4ee">O que você procura</h2>
       </div>
       <span style="font-size: 13.5px; font-weight: 400; color: rgba(242,237,228,.62); max-width: 32ch">Não achou? Mande o chassi no WhatsApp — a gente localiza.</span>
     </div>
@@ -306,36 +326,79 @@
             <span style="color: #e1ad66" dangerouslySetInnerHTML="{{ c.icon }}"></span>
             <span style="font-size: 10.5px; letter-spacing: .16em; color: rgba(242,237,228,.35); font-variant-numeric: tabular-nums">{{ c.num }}</span>
           </div>
-          <h3 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 500; font-size: 23px; margin: 6px 0 0; color: #f8f4ee">{{ c.title }}</h3>
+          <h3 style="font-family: var(--serif); font-weight: 500; font-size: 23px; margin: 6px 0 0; color: #f8f4ee">{{ c.title }}</h3>
           <p style="margin: 0; font-size: 14px; font-weight: 400; line-height: 1.65; color: rgba(242,237,228,.68)">{{ c.body }}</p>
-          <span class="cdf-arrow" style="display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 18px; font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .14em; color: #e11d38">CONSULTAR NO WHATSAPP →</span>
+          <span class="cdf-arrow" style="display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 18px; font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .14em; color: #e11d38">CONSULTAR NO WHATSAPP →</span>
         </a>
       </sc-for>
     </div>
   </section>
 
   <section id="motores" style="margin-top: 104px; background: #0f0e0c; color: #f2ede4; position: relative; overflow: hidden; border-top: 1px solid rgba(242,237,228,.1); border-bottom: 1px solid rgba(242,237,228,.1)">
-    <div class="cdf-ghost" style="position: absolute; top: 50%; right: 3%; transform: translateY(-50%); font-family: 'Bodoni Moda', Georgia, serif; font-size: 340px; line-height: .8; color: rgba(225,29,56,.07); font-variant-numeric: tabular-nums; pointer-events: none">02</div>
+    <div class="cdf-ghost" style="position: absolute; top: 50%; right: 3%; transform: translateY(-50%); font-family: var(--serif); font-size: 340px; line-height: .8; color: rgba(225,29,56,.07); font-variant-numeric: tabular-nums; pointer-events: none">02</div>
     <div style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center">
       <div data-reveal>
-        <div style="display: flex; align-items: center; gap: 14px; font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: #e1ad66; margin-bottom: 22px">
+        <div style="display: flex; align-items: center; gap: 14px; font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: #e1ad66; margin-bottom: 22px">
           <span style="width: 46px; height: 1px; background: #e1ad66"></span> LINHA DE MOTORES
         </div>
-        <h2 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: clamp(34px, 3.6vw, 56px); line-height: 1.06; letter-spacing: -.018em; margin: 0 0 24px; color: #f8f4ee">Motores completos, parciais e retificados.</h2>
+        <h2 style="font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.6vw, 56px); line-height: 1.06; letter-spacing: -.018em; margin: 0 0 24px; color: #f8f4ee">Motores completos, parciais e retificados.</h2>
         <p style="max-width: 46ch; font-size: 15.5px; font-weight: 400; line-height: 1.74; color: rgba(242,237,228,.74)">Fire, E.torQ, Multijet, GSE Firefly e a linha diesel — testados antes de sair, com garantia e nota. Informe modelo, ano e cilindrada; devolvemos disponibilidade e prazo no mesmo dia.</p>
         <div class="cdf-engine-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(242,237,228,.12); border: 1px solid rgba(242,237,228,.12); margin-top: 38px">
           <sc-for list="{{ engines }}" as="e" hint-placeholder-count="6">
             <div style="background: #0f0e0c; padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
-              <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 19px; color: #f2ede4">{{ e.name }}</span>
+              <span style="font-family: var(--serif); font-size: 19px; color: #f2ede4">{{ e.name }}</span>
               <span style="font-size: 10.5px; letter-spacing: .1em; color: rgba(242,237,228,.42); font-variant-numeric: tabular-nums">{{ e.spec }}</span>
             </div>
           </sc-for>
         </div>
-        <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; margin-top: 34px; border: 1px solid #e1ad66; color: #e1ad66; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; padding: 15px 24px; border-radius: 4px" style-hover="background: #e1ad66; color: #0f0e0c">Consultar disponibilidade</a>
+        <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; margin-top: 34px; border: 1px solid #e1ad66; color: #e1ad66; font-family: var(--sans); font-weight: 600; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; padding: 15px 24px; border-radius: 4px" style-hover="background: #e1ad66; color: #0f0e0c">Consultar disponibilidade</a>
       </div>
       <div data-reveal style="padding: 8px; background: rgba(242,237,228,.05); border: 1px solid rgba(242,237,228,.16); animation: cdf-drift 5s ease-in-out infinite alternate">
         <image-slot id="cdf-motor" shape="rect" style="width: 100%; height: 470px" placeholder="Foto de motor Fiat no estoque"></image-slot>
       </div>
+    </div>
+  </section>
+
+  <section id="estoque" style="max-width: 1240px; margin: 0 auto; padding: 104px 32px 0">
+    <div style="max-width: 640px; margin-bottom: 40px" data-reveal>
+      <div class="cdf-eyebrow" style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px">
+        <span style="width: 46px; height: 1px; background: #e11d38"></span> ESTRUTURA
+      </div>
+      <h2 style="font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.2vw, 50px); line-height: 1.06; letter-spacing: -.018em; margin: 0; color: #f8f4ee">Três galpões, o mesmo quarteirão.</h2>
+      <p style="margin: 16px 0 0; font-size: 15px; font-weight: 400; line-height: 1.72; color: rgba(242,237,228,.68)">Estoque de peças, galpão de e-commerce e galpão de desmonte ficam lado a lado — a operação inteira num só quarteirão, com controle de procedência do começo ao fim.</p>
+    </div>
+
+    <div class="cdf-tabs" role="tablist" style="display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid rgba(242,237,228,.14)" data-reveal>
+      <sc-for list="{{ galTabs }}" as="t" hint-placeholder-count="3">
+        <button type="button" onClick="{{ t.select }}" class="{{ t.cls }}">{{ t.label }}</button>
+      </sc-for>
+    </div>
+
+    <div data-reveal style="margin-top: 28px">
+      <sc-if value="{{ galIs0 }}" hint-placeholder-val="{{ true }}">
+        <div class="cdf-gal-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px">
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-est-1" shape="rect" style="width: 100%; height: 260px" placeholder="Nosso estoque — prateleira 01"></image-slot></div>
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-est-2" shape="rect" style="width: 100%; height: 260px" placeholder="Nosso estoque — prateleira 02"></image-slot></div>
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-est-3" shape="rect" style="width: 100%; height: 260px" placeholder="Nosso estoque — balcão"></image-slot></div>
+        </div>
+        <p style="margin: 18px 0 0; font-size: 13.5px; color: rgba(242,237,228,.6)">Peças novas e usadas conferidas item por item, da linha antiga à atual.</p>
+      </sc-if>
+      <sc-if value="{{ galIs1 }}">
+        <div class="cdf-gal-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px">
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-ecom-1" shape="rect" style="width: 100%; height: 260px" placeholder="Galpão e-commerce — separação"></image-slot></div>
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-ecom-2" shape="rect" style="width: 100%; height: 260px" placeholder="Galpão e-commerce — embalagem"></image-slot></div>
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-ecom-3" shape="rect" style="width: 100%; height: 260px" placeholder="Galpão e-commerce — expedição"></image-slot></div>
+        </div>
+        <p style="margin: 18px 0 0; font-size: 13.5px; color: rgba(242,237,228,.6)">Separação, conferência e embalagem dos pedidos que saem para todo o Brasil.</p>
+      </sc-if>
+      <sc-if value="{{ galIs2 }}">
+        <div class="cdf-gal-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px">
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-desm-1" shape="rect" style="width: 100%; height: 260px" placeholder="Galpão de desmonte — pátio"></image-slot></div>
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-desm-2" shape="rect" style="width: 100%; height: 260px" placeholder="Galpão de desmonte — veículos"></image-slot></div>
+          <div class="cdf-gal-cell" style="padding: 6px; background: #201d19; border: 1px solid rgba(242,237,228,.14)"><image-slot id="cdf-desm-3" shape="rect" style="width: 100%; height: 260px" placeholder="Galpão de desmonte — peças catalogadas"></image-slot></div>
+        </div>
+        <p style="margin: 18px 0 0; font-size: 13.5px; color: rgba(242,237,228,.6)">Desmonte com procedência e controle de origem — cada peça rastreada até o veículo.</p>
+      </sc-if>
     </div>
   </section>
 
@@ -344,59 +407,70 @@
       <div class="cdf-eyebrow" style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px">
         <span style="width: 46px; height: 1px; background: #e11d38"></span> COMO FUNCIONA
       </div>
-      <h2 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 50px); line-height: 1.06; letter-spacing: -.018em; margin: 0; color: #f8f4ee">Do primeiro WhatsApp à peça na sua garagem.</h2>
-      <p style="margin: 16px 0 0; font-size: 15px; font-weight: 400; line-height: 1.72; color: rgba(242,237,228,.68)">Três passos, sem cadastro e sem formulário longo. Você fala direto com alguém do balcão.</p>
+      <h2 style="font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.2vw, 50px); line-height: 1.06; letter-spacing: -.018em; margin: 0; color: #f8f4ee">Do primeiro contato à peça na sua garagem.</h2>
+      <p style="margin: 16px 0 0; font-size: 15px; font-weight: 400; line-height: 1.72; color: rgba(242,237,228,.68)">Três passos. No meio deles, uma entrevista rápida com o robô do nosso CRM — ela existe só para adiantar o atendimento: quanto mais informação você manda, mais rápido a gente responde.</p>
     </div>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px">
       <sc-for list="{{ steps }}" as="p" hint-placeholder-count="3">
         <div data-reveal style="border-top: 2px solid #e11d38; padding-top: 22px">
-          <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .18em; color: #e1ad66; font-variant-numeric: tabular-nums">{{ p.num }}</div>
-          <h3 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 500; font-size: 25px; margin: 14px 0 10px; color: #f8f4ee">{{ p.title }}</h3>
+          <div style="font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .18em; color: #e1ad66; font-variant-numeric: tabular-nums">{{ p.num }}</div>
+          <h3 style="font-family: var(--serif); font-weight: 500; font-size: 25px; margin: 14px 0 10px; color: #f8f4ee">{{ p.title }}</h3>
           <p style="margin: 0; font-size: 14.5px; font-weight: 400; line-height: 1.72; color: rgba(242,237,228,.72)">{{ p.body }}</p>
         </div>
       </sc-for>
     </div>
     <div class="cdf-cta-row" data-reveal style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 44px; padding-top: 30px; border-top: 1px solid rgba(242,237,228,.14)">
-      <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; align-items: center; gap: 10px; background: #e11d38; color: #fff; border: 1px solid #e11d38; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 16px 26px; border-radius: 4px" style-hover="background: #ff3049; border-color: #ff3049">
+      <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; align-items: center; gap: 10px; background: #e11d38; color: #fff; border: 1px solid #e11d38; font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 16px 26px; border-radius: 4px" style-hover="background: #ff3049; border-color: #ff3049">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
         Começar meu orçamento
       </a>
-      <span style="font-size: 12.5px; letter-spacing: .04em; color: rgba(242,237,228,.55)">Resposta em até 24h úteis · Seg–Sex 8h–18h · Sáb 8h–12h</span>
+      <span style="font-size: 12.5px; letter-spacing: .04em; color: rgba(242,237,228,.55)">Orçamento no mesmo dia · Seg–Sex 8h–18h · Sáb 8h–12h</span>
     </div>
   </section>
 
   <section id="orcamento" style="max-width: 1240px; margin: 104px auto 0; padding: 0 32px">
-    <div style="border: 1px solid rgba(242,237,228,.16); background: #201d19; display: grid; grid-template-columns: 1.1fr .9fr" data-reveal>
-      <div class="cdf-pad" style="padding: 58px 52px; border-right: 1px solid rgba(242,237,228,.14)">
-        <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66); margin-bottom: 18px">FAÇA SEU ORÇAMENTO</div>
-        <h2 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: clamp(30px, 3vw, 46px); line-height: 1.08; letter-spacing: -.018em; margin: 0 0 14px; color: #f8f4ee">Diga a peça. Respondemos no WhatsApp.</h2>
-        <p style="font-size: 15.5px; font-weight: 400; line-height: 1.72; color: rgba(242,237,228,.76); max-width: 46ch">Sem formulário: manda o modelo, o ano e a peça direto no WhatsApp — respondemos com preço, prazo e frete no mesmo dia.</p>
-        <div class="cdf-cta-row" style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px">
-          <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; align-items: center; gap: 11px; background: #e11d38; color: #fff; border: 1px solid #e11d38; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; padding: 19px 32px; border-radius: 4px; animation: cdf-pulse 3.4s ease-out infinite 1s" style-hover="background: #ff3049; border-color: #ff3049">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
-            Pedir orçamento agora
-          </a>
-          <a class="cdf-btn" href="tel:+553134111555" style="display: inline-flex; align-items: center; gap: 11px; border: 1px solid rgba(242,237,228,.3); color: #f2ede4; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; padding: 19px 30px; border-radius: 4px" style-hover="border-color: #e1ad66; color: #e1ad66">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"></path></svg>
-            (31) 3411-1555
-          </a>
-        </div>
-        <div style="display: flex; gap: 26px; flex-wrap: wrap; margin-top: 30px; font-size: 12px; letter-spacing: .1em; color: rgba(242,237,228,.55); text-transform: uppercase">
-          <span>Resposta em até 24h</span>
-          <span>Nota fiscal e garantia</span>
-          <span>Envio para todo o Brasil</span>
-        </div>
+    <div style="border: 1px solid rgba(242,237,228,.16); background: #201d19" data-reveal>
+
+      <div class="cdf-pad cdf-orc-banner" style="background: #e11d38; color: #fff; padding: 58px 52px; position: relative; overflow: hidden">
+        <div style="position: absolute; top: 0; bottom: 0; width: 22%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.16), transparent); animation: cdf-sweep 5s ease-in-out infinite 1.4s; pointer-events: none"></div>
+        <div style="font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: .24em; color: rgba(255,255,255,.82); margin-bottom: 16px">FAÇA SEU ORÇAMENTO</div>
+        <h2 style="font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 14px; color: #fff; max-width: 18ch">MANDA O MODELO E O ANO. A GENTE ACHA A PEÇA.</h2>
+        <p style="font-size: clamp(14.5px, 1.4vw, 17px); font-weight: 500; line-height: 1.6; color: rgba(255,255,255,.9); margin: 0; max-width: 40ch">Atendimento pelo WhatsApp com orçamento no mesmo dia.</p>
+        <a class="cdf-btn" href="{{ waLink }}" style="display: inline-flex; align-items: center; gap: 11px; margin-top: 30px; background: #fff; color: #e11d38; border: 1px solid #fff; font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; padding: 18px 32px; border-radius: 4px" style-hover="background: #171512; color: #fff; border-color: #171512">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
+          FAÇA SEU ORÇAMENTO
+        </a>
       </div>
-      <div id="unidades" class="cdf-pad" style="padding: 58px 46px; display: flex; flex-direction: column; gap: 26px">
-        <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66)">UNIDADES</div>
-        <sc-for list="{{ units }}" as="u" hint-placeholder-count="3">
-          <div style="border-bottom: 1px solid rgba(242,237,228,.14); padding-bottom: 20px">
-            <h4 style="font-family: 'Bodoni Moda', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 6px; color: #f8f4ee">{{ u.name }}</h4>
-            <p style="margin: 0; font-size: 13.5px; font-weight: 400; line-height: 1.6; color: rgba(242,237,228,.66)">{{ u.addr }}</p>
-            <p style="margin: 6px 0 0; font-size: 13.5px; color: #e1ad66; font-variant-numeric: tabular-nums">{{ u.phone }}</p>
+
+      <div class="cdf-setores" style="display: grid; grid-template-columns: 1.1fr .9fr; border-top: 1px solid rgba(242,237,228,.16)">
+        <div class="cdf-pad" style="padding: 52px 52px; border-right: 1px solid rgba(242,237,228,.14)">
+          <div style="font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66); margin-bottom: 24px">FALE COM O SETOR</div>
+          <sc-for list="{{ setores }}" as="s" hint-placeholder-count="3">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgba(242,237,228,.14); padding: 16px 0">
+              <span style="font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(242,237,228,.7)">{{ s.nome }}</span>
+              <a href="{{ s.href }}" style="font-family: var(--serif); font-size: 19px; color: #e1ad66; font-variant-numeric: tabular-nums; white-space: nowrap">{{ s.tel }}</a>
+            </div>
+          </sc-for>
+          <a class="cdf-btn" href="https://wa.me/5531987461030" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; border: 1px solid rgba(242,237,228,.3); color: #f2ede4; font-family: var(--sans); font-weight: 600; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; padding: 14px 22px; border-radius: 4px" style-hover="border-color: #e1ad66; color: #e1ad66">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
+            WhatsApp (31) 9 8746-1030
+          </a>
+        </div>
+        <div class="cdf-pad" style="padding: 52px 46px; display: flex; flex-direction: column; gap: 22px">
+          <div style="font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: .24em; color: rgba(242,237,228,.66)">ATENDIMENTO</div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: rgba(242,237,228,.5); margin-bottom: 6px">E-mail</div>
+            <a href="mailto:vendas@casadofiat.com.br" style="font-family: var(--serif); font-size: 18px; color: #e1ad66">vendas@casadofiat.com.br</a>
           </div>
-        </sc-for>
-        <div style="font-size: 13px; font-weight: 400; line-height: 1.7; color: rgba(242,237,228,.66)">Seg a sex, 8h–18h · Sáb, 8h–12h<br>vendas@casadofiat.com.br</div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: rgba(242,237,228,.5); margin-bottom: 6px">Horários</div>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.7; color: rgba(242,237,228,.76)">Segunda a sexta, 8h–18h<br>Sábado, 8h–12h</p>
+          </div>
+          <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 4px; font-size: 11px; letter-spacing: .1em; color: rgba(242,237,228,.5); text-transform: uppercase">
+            <span>Nota fiscal e garantia</span>
+            <span>Envio para todo o Brasil</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -410,22 +484,22 @@
             <span style="flex: 1; background: #f2ede4"></span>
             <span style="flex: 1; background: #e11d38"></span>
           </span>
-          <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 25px; font-weight: 500; color: #f8f4ee">Casa do Fiat</span>
+          <span style="font-family: var(--serif); font-size: 25px; font-weight: 500; color: #f8f4ee">Casa do Fiat</span>
         </div>
-        <p style="font-size: 13.5px; font-weight: 400; line-height: 1.72; max-width: 36ch; margin: 0">Peças novas e usadas Fiat &amp; Jeep. Mais de 35 anos resolvendo problemas para todo o Brasil.</p>
+        <p style="font-size: 13.5px; font-weight: 400; line-height: 1.72; max-width: 36ch; margin: 0">Peças novas e usadas Fiat · Jeep · RAM. Mais de 35 anos resolvendo problemas para todo o Brasil.</p>
       </div>
       <div>
-        <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 11px; font-weight: 600; letter-spacing: .2em; color: rgba(242,237,228,.66); margin-bottom: 16px">LINKS</div>
+        <div style="font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .2em; color: rgba(242,237,228,.66); margin-bottom: 16px">LINKS</div>
         <div style="display: grid; gap: 10px; font-size: 13.5px">
           <a href="#empresa" style="color: rgba(242,237,228,.62)">Empresa</a>
           <a href="#produtos" style="color: rgba(242,237,228,.62)">Produtos</a>
           <a href="#motores" style="color: rgba(242,237,228,.62)">Motores</a>
           <a href="#como-funciona" style="color: rgba(242,237,228,.62)">Como funciona</a>
-          <a href="#unidades" style="color: rgba(242,237,228,.62)">Unidades</a>
+          <a href="#estoque" style="color: rgba(242,237,228,.62)">Estoque</a>
         </div>
       </div>
       <div>
-        <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 11px; font-weight: 600; letter-spacing: .2em; color: rgba(242,237,228,.66); margin-bottom: 16px">CONTATO</div>
+        <div style="font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .2em; color: rgba(242,237,228,.66); margin-bottom: 16px">CONTATO</div>
         <div style="display: grid; gap: 10px; font-size: 13.5px; font-variant-numeric: tabular-nums">
           <a href="tel:+553134111555" style="color: rgba(242,237,228,.62)">(31) 3411-1555</a>
           <a href="https://wa.me/5531987461030" style="color: rgba(242,237,228,.62)">(31) 9 8746-1030</a>
@@ -433,8 +507,8 @@
         </div>
       </div>
       <div>
-        <div style="font-family: Archivo, sans-serif; font-stretch: 118%; font-size: 11px; font-weight: 600; letter-spacing: .2em; color: rgba(242,237,228,.66); margin-bottom: 16px">LOJA VIRTUAL</div>
-        <a class="cdf-btn" href="https://lista.mercadolivre.com.br/_CustId_429994136" style="display: inline-flex; border: 1px solid rgba(242,237,228,.32); color: #f2ede4; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; padding: 13px 20px; border-radius: 4px" style-hover="border-color: #e1ad66; color: #e1ad66">Comprar online</a>
+        <div style="font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .2em; color: rgba(242,237,228,.66); margin-bottom: 16px">LOJA VIRTUAL</div>
+        <a class="cdf-btn" href="https://lista.mercadolivre.com.br/_CustId_429994136" style="display: inline-flex; border: 1px solid rgba(242,237,228,.32); color: #f2ede4; font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; padding: 13px 20px; border-radius: 4px" style-hover="border-color: #e1ad66; color: #e1ad66">Comprar online</a>
       </div>
     </div>
     <div style="max-width: 1240px; margin: 0 auto; padding: 22px 32px 40px; border-top: 1px solid rgba(242,237,228,.12); display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 11.5px; color: rgba(242,237,228,.58)">
@@ -443,7 +517,7 @@
     </div>
   </footer>
 
-  <a href="{{ waLink }}" class="cdf-btn cdf-fab" style="position: fixed; right: 26px; bottom: 26px; z-index: 55; display: flex; align-items: center; gap: 10px; background: #e11d38; color: #fff; border: 1px solid #ff3049; padding: 14px 20px; border-radius: 999px; font-family: Archivo, sans-serif; font-stretch: 118%; font-weight: 600; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 14px 34px rgba(0,0,0,.45)" style-hover="background: #ff3049">
+  <a href="{{ waLink }}" class="cdf-btn cdf-fab" style="position: fixed; right: 26px; bottom: 26px; z-index: 55; display: flex; align-items: center; gap: 10px; background: #e11d38; color: #fff; border: 1px solid #ff3049; padding: 14px 20px; border-radius: 999px; font-family: var(--sans); font-weight: 600; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 14px 34px rgba(0,0,0,.45)" style-hover="background: #ff3049">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
     Falar agora
   </a>
@@ -455,10 +529,11 @@ class Component extends DCLogic {
   state = {
     progress: "0%",
     counters: [0, 0, 0, 0],
+    galAtiva: 0,
     form: { nome: "", modelo: "", ano: "", peca: "" }
   };
 
-  models = ["Uno", "Palio", "Strada", "Toro", "Argo", "Mobi", "Cronos", "Fiorino", "Ducato", "Doblò", "Siena", "Punto", "Pulse", "Fastback", "Renegade", "Compass"];
+  models = ["Uno", "Palio", "Strada", "Toro", "Argo", "Mobi", "Cronos", "Fiorino", "Ducato", "Doblò", "Siena", "Punto", "Pulse", "Fastback", "Renegade", "Compass", "Commander", "RAM 700", "RAM 1500", "Gladiator"];
 
   statDefs = [
     { target: 35, suffix: "+", label: "anos de mercado" },
@@ -516,7 +591,7 @@ class Component extends DCLogic {
           navLinks.forEach((l) => l.classList.toggle("is-active", l.getAttribute("href") === hash));
         });
       }, { rootMargin: "-45% 0px -50% 0px" });
-      document.querySelectorAll("section[id], #unidades").forEach((s) => spy.observe(s));
+      document.querySelectorAll("section[id]").forEach((s) => spy.observe(s));
       this.spy = spy;
     }
 
@@ -639,15 +714,23 @@ class Component extends DCLogic {
         { name: "Tigershark", spec: "2.0 · Jeep" }
       ],
       steps: [
-        { num: "PASSO 01", title: "Manda o modelo", body: "Chassi, modelo e ano no WhatsApp — ou uma foto da peça. Identificamos o código correto." },
-        { num: "PASSO 02", title: "Recebe o orçamento", body: "Preço da peça nova e da usada, prazo e frete, em até 24 horas úteis." },
-        { num: "PASSO 03", title: "Sai no mesmo dia", body: "Aprovado, despachamos para todo o Brasil com nota fiscal e garantia." }
+        { num: "PASSO 01", title: "Você faz o contato", body: "Chama no WhatsApp informando modelo, ano e a peça que precisa." },
+        { num: "PASSO 02", title: "Entrevista rápida no CRM", body: "Um robô do nosso CRM faz algumas perguntas e recebe o que você tiver: códigos de peça, fotos e detalhes do veículo. Leva poucos minutos e adianta toda a busca." },
+        { num: "PASSO 03", title: "A equipe responde", body: "Retornamos com preço, prazo e frete — e você aprova pelo WhatsApp." }
       ],
-      units: [
-        { name: "Matriz — Monsenhor Messias", addr: "Av. Dom Pedro II, 4090 · Belo Horizonte/MG", phone: "(31) 3411-1555" },
-        { name: "Loja Peças Usadas", addr: "Av. Dom Pedro II, 4128 · Belo Horizonte/MG", phone: "(31) 9 8746-1030" },
-        { name: "Centro de Motores", addr: "Consulte disponibilidade e visita técnica", phone: "(31) 9 8746-1030" }
-      ]
+      setores: [
+        { nome: "Vendas", tel: "(31) 3411-1555", href: "tel:+553134111555" },
+        { nome: "Financeiro", tel: "(31) 0000-0000", href: "#" },
+        { nome: "Setor de Compras", tel: "(31) 0000-0000", href: "#" }
+      ],
+      galTabs: ["Nosso Estoque", "Galpão E-commerce", "Galpão de Desmonte"].map((label, i) => ({
+        label,
+        cls: "cdf-tab" + (this.state.galAtiva === i ? " is-active" : ""),
+        select: () => this.setState({ galAtiva: i })
+      })),
+      galIs0: this.state.galAtiva === 0,
+      galIs1: this.state.galAtiva === 1,
+      galIs2: this.state.galAtiva === 2
     };
   }
 }
