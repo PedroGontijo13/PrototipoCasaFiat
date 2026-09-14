@@ -151,6 +151,8 @@
     [style*="columns: 2"] { columns: 1 !important; }
     section, footer > div { padding-left: var(--shell) !important; padding-right: var(--shell) !important; }
     section { padding-top: 60px !important; }
+    /* #top já controla o respiro internamente (grid + carrossel full-bleed de modelos) */
+    #top { padding-left: 0 !important; padding-right: 0 !important; }
     .cdf-pad { padding: 32px 22px !important; }
     .cdf-ghost { font-size: 118px !important; }
   }
@@ -222,7 +224,7 @@
 <div style="position: relative; width: 100%; overflow: hidden; background: #171512">
 
   <div style="position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; background: rgba(242,237,228,.08)">
-    <div style="height: 100%; display: flex; width: {{ progress }}">
+    <div id="cdf-progress-fill" style="height: 100%; display: flex; width: 0%">
       <div style="flex: 1; background: #0e9e52"></div>
       <div style="flex: 1; background: #f2ede4"></div>
       <div style="flex: 1; background: #e11d38"></div>
@@ -775,7 +777,6 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5531987461030&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tricolorAccents&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;animateCounters&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
   state = {
-    progress: "0%",
     counters: [0, 0, 0, 0],
     galAtiva: 0,
     form: { nome: "", modelo: "", ano: "", peca: "" }
@@ -798,7 +799,8 @@ class Component extends DCLogic {
     this.onScroll = () => {
       const h = document.documentElement;
       const max = h.scrollHeight - h.clientHeight;
-      this.setState({ progress: (max > 0 ? (h.scrollTop / max) * 100 : 0).toFixed(1) + "%" });
+      const bar = document.getElementById("cdf-progress-fill");
+      if (bar) bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0).toFixed(1) + "%";
       const p = document.querySelector("[data-parallax]");
       if (p) p.style.transform = "translateY(" + Math.min(40, h.scrollTop * 0.06) + "px)";
     };
@@ -930,7 +932,6 @@ class Component extends DCLogic {
       (f.modelo ? " para " + f.modelo : "") + (f.ano ? " " + f.ano : "") + ".";
 
     return {
-      progress: this.state.progress,
       tricolor: this.props.tricolorAccents !== false,
       waLink: this.wa("Olá, Casa do Fiat! Gostaria de um orçamento de peça."),
       formLink: this.wa(msg),
